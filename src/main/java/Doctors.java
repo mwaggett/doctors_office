@@ -24,6 +24,15 @@ public class Doctors {
     return specialty;
   }
 
+  public List<Patient> getPatients() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM patients WHERE doctor_id = :id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetch(Patient.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherDoctorsInstance) {
     if (!(otherDoctorsInstance instanceof Doctors)) {
