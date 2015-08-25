@@ -6,10 +6,12 @@ public class Patient {
    private int id;
    private String name;
    private String birthday;
+   private int doctor_id;
 
-  public Patient (String name, String birthday) {
+  public Patient (String name, String birthday, int doctor_id) {
     this.name = name;
     this.birthday = birthday;
+    this.doctor_id = doctor_id;
   }
 
   public int getId() {
@@ -24,6 +26,10 @@ public class Patient {
     return birthday;
   }
 
+  public int getDoctorId() {
+    return doctor_id;
+  }
+
   @Override
   public boolean equals(Object otherPatientInstance) {
     if (!(otherPatientInstance instanceof Patient)) {
@@ -32,6 +38,7 @@ public class Patient {
       Patient newPatientInstance = (Patient) otherPatientInstance;
       return this.getName().equals(newPatientInstance.getName()) &&
               this.getBirthday().equals(newPatientInstance.getBirthday()) &&
+              this.getDoctorId() == newPatientInstance.getDoctorId() &&
               this.getId() == newPatientInstance.getId();
     }
   }
@@ -45,10 +52,11 @@ public class Patient {
 
   public void save() {
     try(Connection con = DB.sql2o.open()){
-      String sql = "INSERT INTO patients (name, birthday) VALUES (:name, :birthday)";
+      String sql = "INSERT INTO patients (name, birthday, doctor_id) VALUES (:name, :birthday, :doctor_id)";
       this.id = (int)con.createQuery(sql, true)
         .addParameter("name", name)
         .addParameter("birthday", birthday)
+        .addParameter("doctor_id", doctor_id)
         .executeUpdate()
         .getKey();
     }

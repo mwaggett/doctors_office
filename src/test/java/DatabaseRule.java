@@ -11,8 +11,9 @@ public class DatabaseRule extends ExternalResource {
   protected void after() {
     try(Connection con = DB.sql2o.open()) {
       String deletePatientsQuery = "DELETE FROM patients *;"; // Change to actual table name.
-      // v^Add same things for any other tables in the database.^v
+      String deleteDoctorsQuery = "DELETE FROM doctors *;"; // Change to actual table name.
       con.createQuery(deletePatientsQuery).executeUpdate();
+      con.createQuery(deleteDoctorsQuery).executeUpdate();
     }
   }
 }
