@@ -43,6 +43,15 @@ public class Doctors {
     }
   }
 
+  public int getNumberOfPatients() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT COUNT(doctor_id) FROM patients WHERE doctor_id = :id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeScalar(Integer.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherDoctorsInstance) {
     if (!(otherDoctorsInstance instanceof Doctors)) {
@@ -56,7 +65,7 @@ public class Doctors {
   }
 
   public static List<Doctors> all() {
-    String sql = "SELECT * FROM doctors";
+    String sql = "SELECT * FROM doctors ORDER BY name ASC";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Doctors.class);
     }

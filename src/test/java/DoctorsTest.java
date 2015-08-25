@@ -13,6 +13,15 @@ public class DoctorsTest {
   }
 
   @Test
+  public void all_returnsAlphabetizedDoctors() {
+    Doctors firstDoctor= new Doctors("Dr. John Doe");
+    firstDoctor.save();
+    Doctors secondDoctor = new Doctors("Dr. Fred Doe");
+    secondDoctor.save();
+    assertEquals(secondDoctor, Doctors.all().get(0));
+  }
+
+  @Test
   public void equals_returnTrueIfNamesAreTheSame() {
     Doctors firstDoctor= new Doctors("Dr. John Doe");
     Doctors secondDoctor = new Doctors("Dr. John Doe");
@@ -41,6 +50,19 @@ public class DoctorsTest {
     newPatient.save();
     newPatient.addDoctor(newDoctor.getId());
     assertEquals(newPatient, newDoctor.getPatients().get(0));
+  }
+
+  @Test
+  public void getNumberOfPatients_returnsCorrectNumber() {
+    Doctors newDoctor = new Doctors("Dr. John Doe");
+    newDoctor.save();
+    Patient firstPatient = new Patient("Joe Shmoe", "July 23, 1990");
+    firstPatient.save();
+    firstPatient.addDoctor(newDoctor.getId());
+    Patient secondPatient = new Patient("Jane Shmoe", "March 17, 1990");
+    secondPatient.save();
+    secondPatient.addDoctor(newDoctor.getId());
+    assertEquals(2, newDoctor.getNumberOfPatients());
   }
 
   @Test
