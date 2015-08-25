@@ -36,8 +36,9 @@ public class DoctorsTest {
   public void getPatients_returnsCorrectPatients() {
     Doctors newDoctor = new Doctors("Dr. John Doe", "Cardiology");
     newDoctor.save();
-    Patient newPatient = new Patient("Joe Shmoe", "July 23, 1990", newDoctor.getId());
+    Patient newPatient = new Patient("Joe Shmoe", "July 23, 1990");
     newPatient.save();
+    newPatient.addDoctor(newDoctor.getId());
     assertEquals(newPatient, newDoctor.getPatients().get(0));
   }
 

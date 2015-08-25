@@ -8,10 +8,9 @@ public class Patient {
    private String birthday;
    private int doctor_id;
 
-  public Patient (String name, String birthday, int doctor_id) {
+  public Patient (String name, String birthday) {
     this.name = name;
     this.birthday = birthday;
-    this.doctor_id = doctor_id;
   }
 
   public int getId() {
@@ -24,6 +23,17 @@ public class Patient {
 
   public String getBirthday() {
     return birthday;
+  }
+
+  public void addDoctor(int doctor_id){
+    this.doctor_id = doctor_id;
+    String sql = "UPDATE patients SET doctor_id = :doctor_id WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("doctor_id", doctor_id)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
   }
 
   public int getDoctorId() {
