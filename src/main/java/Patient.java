@@ -54,6 +54,14 @@ public class Patient {
     }
   }
 
-  //public static Patient find(int id) {}
+  public static Patient find(int id) {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM patients where id=:id";
+      Patient patient = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Patient.class);
+      return patient;
+    }
+  }
 
 }

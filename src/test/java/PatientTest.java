@@ -46,6 +46,13 @@ public class PatientTest {
     assertEquals(Patient.all().get(0).getId(), newPatient.getId());
   }
 
+  @Test
+  public void find_findsCorrectId(){
+    Patient newPatient = new Patient("John Doe", "January 1, 1965");
+    newPatient.save();
+    Patient savedPatient = Patient.find(newPatient.getId());
+    assertEquals(savedPatient, newPatient);
+  }
 
 
   // @Test
