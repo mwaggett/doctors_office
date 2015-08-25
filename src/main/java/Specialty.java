@@ -20,7 +20,7 @@ public class Specialty {
 
   public List<Doctors> getDoctors() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM doctors WHERE specialty_id = :id";
+      String sql = "SELECT * FROM doctors WHERE specialty_id = :id ORDER BY name ASC";
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetch(Doctors.class);

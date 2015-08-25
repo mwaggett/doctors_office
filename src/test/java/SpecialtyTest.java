@@ -30,10 +30,13 @@ public class SpecialtyTest {
   public void getDoctors_returnsCorrectDoctors() {
     Specialty newSpecialty = new Specialty("Cardiology");
     newSpecialty.save();
-    Doctors newDoctor = new Doctors("Dr. Joe Shmoe");
-    newDoctor.save();
-    newDoctor.addSpecialty(newSpecialty.getId());
-    assertEquals(newDoctor, newSpecialty.getDoctors().get(0));
+    Doctors firstDoctor = new Doctors("Dr. Joe Shmoe");
+    firstDoctor.save();
+    Doctors secondDoctor = new Doctors("Dr. Adam West");
+    secondDoctor.save();
+    firstDoctor.addSpecialty(newSpecialty.getId());
+    secondDoctor.addSpecialty(newSpecialty.getId());
+    assertEquals(secondDoctor, newSpecialty.getDoctors().get(0));
   }
 
   @Test
