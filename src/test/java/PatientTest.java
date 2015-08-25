@@ -61,11 +61,20 @@ public class PatientTest {
     assertEquals(savedPatient, newPatient);
   }
 
+  @Test
+  public void update_updatesPatientNameInMemory() {
+    Patient newPatient = new Patient("John Doe", "January 1, 1965");
+    newPatient.save();
+    newPatient.update("Barack Obama");
+    assertEquals("Barack Obama", newPatient.getName());
+  }
 
-  // @Test
-  // public void methodName_whatIsBeingTested_desiredResult() {
-  //   Class instance = new Class();
-  //   assertEquals(expectedValue, instance.methodName(param));
-  // }
+  @Test
+  public void update_updatesPatientNameInDatabase() {
+    Patient newPatient = new Patient("John Doe", "January 1, 1965");
+    newPatient.save();
+    newPatient.update("Barack Obama");
+    assertEquals("Barack Obama", Patient.all().get(0).getName());
+  }
 
 }

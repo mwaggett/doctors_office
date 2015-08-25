@@ -82,4 +82,15 @@ public class Patient {
     }
   }
 
+  public void update(String newName) {
+    name = newName;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE patients SET name = :name WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
 }
