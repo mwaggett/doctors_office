@@ -5,11 +5,10 @@ public class Doctors {
 
    private int id;
    private String name;
-   private String specialty;
+   private int specialty_id;
 
-  public Doctors (String name, String specialty) {
+  public Doctors (String name) {
     this.name = name;
-    this.specialty = specialty;
   }
 
   public int getId() {
@@ -20,8 +19,19 @@ public class Doctors {
     return name;
   }
 
-  public String getSpecialty() {
-    return specialty;
+  public void addSpecialty(int specialty_id){
+    this.specialty_id = specialty_id;
+    String sql = "UPDATE doctors SET specialty_id = :specialty_id WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("specialty_id", specialty_id)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public int getSpecialty() {
+    return specialty_id;
   }
 
   public List<Patient> getPatients() {
@@ -40,7 +50,7 @@ public class Doctors {
     } else {
       Doctors newDoctorsInstance = (Doctors) otherDoctorsInstance;
       return this.getName().equals(newDoctorsInstance.getName()) &&
-              this.getSpecialty().equals(newDoctorsInstance.getSpecialty()) &&
+              this.getSpecialty() == newDoctorsInstance.getSpecialty() &&
               this.getId() == newDoctorsInstance.getId();
     }
   }
@@ -54,10 +64,10 @@ public class Doctors {
 
   public void save() {
     try(Connection con = DB.sql2o.open()){
-      String sql = "INSERT INTO doctors (name, specialty) VALUES (:name, :specialty)";
+      String sql = "INSERT INTO doctors (name, specialty_id) VALUES (:name, :specialty_id)";
       this.id = (int)con.createQuery(sql, true)
         .addParameter("name", name)
-        .addParameter("specialty", specialty)
+        .addParameter("specialty_id", specialty_id)
         .executeUpdate()
         .getKey();
     }
