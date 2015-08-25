@@ -1,8 +1,17 @@
-<h1>Home Page</h1>
-<form action='/newpage' method=''>
+<h1>specialties:</h1>
+
+<ul>
+#foreach($specialty in $specialties)
+
+  <li><a href="/specialties/$specialty.getId()">$specialty.getSpecialty()</a></li>
+
+#end
+</ul>
+
+<form action='/' method='post'>
   <div class='form-group'>
-    <label></label>
-    <input type="" name="" id="" class="form-control">
+    <label>add new specialty</label>
+    <input type="text" name="newSpecialty" id="newSpecialty" class="form-control">
   </div>
-  <button type="submit" id="" class='btn'>Submit!</button>
+  <button type="submit" class='btn'>Submit!</button>
 </form>

@@ -1,0 +1,20 @@
+<h1>Doctors:</h1>
+
+<ul>
+#foreach($doctor in $doctors)
+
+  <li><a href="/specialties/$specialty.getId()/doctors/$doctor.getId()">
+          $doctor.getName()</a>: $doctor.getNumberOfPatients()</li>
+
+#end
+</ul>
+
+<form action='/specialties/$specialty.getId()' method='post'>
+  <div class='form-group'>
+    <label>add new doctor</label>
+    <input type="text" name="newDoctor" id="newDoctor" class="form-control">
+  </div>
+  <button type="submit" class='btn'>Submit!</button>
+</form>
+
+<a href="/"> return to specialties</a>
