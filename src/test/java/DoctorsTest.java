@@ -87,5 +87,13 @@ public class DoctorsTest {
     assertEquals(savedDoctor, newDoctor);
   }
 
+  @Test
+  public void delete_deletesDoctorFromDatabase() {
+    Doctors newDoctor = new Doctors("John Doe");
+    newDoctor.save();
+    newDoctor.delete();
+    assertEquals(0, Doctors.all().size());
+  }
+
 
 }

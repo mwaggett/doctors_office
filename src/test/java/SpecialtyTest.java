@@ -61,5 +61,13 @@ public class SpecialtyTest {
     assertEquals(savedSpecialty, newSpecialty);
   }
 
+  @Test
+  public void delete_deletesSpecialtyFromDatabase() {
+    Specialty newSpecialty = new Specialty("ortho");
+    newSpecialty.save();
+    newSpecialty.delete();
+    assertEquals(0, Specialty.all().size());
+  }
+
 
 }

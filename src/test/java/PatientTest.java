@@ -77,4 +77,12 @@ public class PatientTest {
     assertEquals("Barack Obama", Patient.all().get(0).getName());
   }
 
+  @Test
+  public void delete_deletesPatientFromDatabase() {
+    Patient newPatient = new Patient("John Doe", "January 1, 1965");
+    newPatient.save();
+    newPatient.delete();
+    assertEquals(0, Patient.all().size());
+  }
+
 }
