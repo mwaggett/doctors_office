@@ -6,7 +6,7 @@
 
 ## Description
 
-This app allows the user to view medical specialties, doctors within each specialty, and each doctor's patients. The user may also add, edit, and delete specialties, doctors, and patients. _**Methods for all functionality exist, but the web interface does not accommodate editing and deleting yet._**
+This app allows the user to view medical specialties, doctors within each specialty, and each doctor's patients. The user may also add, edit, and delete specialties, doctors, and patients. _**Methods for all functionality exist, but the web interface does not accommodate editing and deleting yet.**_
 
 ## Setup
 
