@@ -1,25 +1,41 @@
-# Application Name
+# Doctors' Office ~KIND OF UNFINISHED~
 
-##### _{Brief description of application}, {Date of current version}_
+##### _Integration Testing with Databases practice for Epicodus, 25 August 2015_
 
-#### By **Molly Waggett**
+#### By **Andrea Padgett & Molly Waggett**
 
 ## Description
 
-{This is a detailed description of your application. Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. Do you want other developers to use this code in their apps? Talk about things like that here in simple terms.}
+This app allows the user to view medical specialties, doctors within each specialty, and each doctor's patients. The user may also add, edit, and delete specialties, doctors, and patients. _**Methods for all functionality exist, but the web interface does not accommodate editing and deleting yet._**
 
 ## Setup
 
+* Set up the database in PostgreSQL by running the following commands in your terminal:
+```
+  psql
+  CREATE DATABASE doctors_office;
+  \c doctors_office;
+  CREATE TABLE patients (id serial PRIMARY KEY, name varchar, birthday varchar, doctor_id int);
+  CREATE TABLE doctors (id serial PRIMARY KEY, name varchar, specialty_id int);
+  CREATE TABLE specialties (id serial PRIMARY KEY, specialty varchar);
+```
+* If you wish to run tests, create a test database:
+```
+  CREATE DATABASE doctors_office_test WITH TEMPLATE doctors_office;
+```
 * Clone this repository.
 * Using the command line, navigate to the top level of the cloned directory.
 * Make sure you have gradle installed. Then run the following command in your terminal:
-* _gradle run_
+```
+  gradle run
+```
 * Go to localhost:4567.
 * Go!
 
 ## Technologies Used
 
 * Java
+* PostgreSQL
 * Spark
 * Velocity
 * Gradle
@@ -28,7 +44,7 @@
 
 ### Legal
 
-Copyright (c) 2015 **Molly Waggett**
+Copyright (c) 2015 **Andrea Padgett & Molly Waggett**
 
 This software is licensed under the MIT license.
 
